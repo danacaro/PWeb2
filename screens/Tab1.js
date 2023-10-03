@@ -45,7 +45,7 @@ export default class Tab1 extends Component {
         <Text style={{color: 'black', textAlign: 'center',fontSize: 40}}> Bienvenido </Text>
 
       <View>
-        <Text style={{color:'red', fontSize: 30, textAlign:'center'}}>Lista de Trabajadores</Text>
+        <Text style={{color:'blue', fontSize: 30, textAlign:'center'}}>Trabajadores</Text>
         <FlatList
         data={this.state.dataSource}
         renderItem={({item}) => 

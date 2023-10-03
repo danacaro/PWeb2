@@ -19,22 +19,22 @@ export default class Menu extends Component {
     return (
       
       <Tab.Navigator>
-        <Tab.Screen name="Inicio" component={Tab1} initialParams={{nombre:this.props.route.params.nombre}}
-          options={{
-          tabBarLabel: 'Inicio',
-          tabBarIcon: ({ color, size}) => (
-            <MaterialCommunityIcons name="home" color={'black'} size={30} />
-          ),
-        }}/>
         <Tab.Screen name="Perfil" component={Tab2} initialParams={{nombre:this.props.route.params.nombre}}
           options={{
             tabBarLabel: 'Perfil',
             tabBarIcon: ({ color, size}) => (
-              <MaterialCommunityIcons name="account" color={'black'} size={30} />
+              <MaterialCommunityIcons name="account" color={'red'} size={30} />
             ),
           }}
-        
         />
+        <Tab.Screen name="Inicio" component={Tab1} initialParams={{nombre:this.props.route.params.nombre}}
+          options={{
+          tabBarLabel: 'Inicio',
+          tabBarIcon: ({ color, size}) => (
+            <MaterialCommunityIcons name="home" color={'red'} size={30} />
+          ),
+        }}/>
+        
       </Tab.Navigator>
 
     );
