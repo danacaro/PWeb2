@@ -7,11 +7,14 @@ import Tab2 from './Tab2';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 
 export default class Menu extends Component {
+
   constructor(props) {
     super(props);
     this.state = {
     };
   }
+
+
 
   render() {
     const Tab = createBottomTabNavigator();

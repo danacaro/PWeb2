@@ -1,11 +1,13 @@
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import React, { Component } from 'react';
 import { View, Text , TouchableOpacity, Image, FlatList} from 'react-native';
-
+import { NavigationContext } from '@react-navigation/native'
+import Usuario from './Usuario';
 import Tab2 from './Tab2';
 
 
 export default class Tab1 extends Component {
+  static contextType = NavigationContext;
   constructor(props) {
     super(props);
     this.state = {
@@ -14,23 +16,31 @@ export default class Tab1 extends Component {
     };
   }
 
-  componentDidMount(){
-    var xhttp = new XMLHttpRequest();
-    _this = this; //para acceder al usestate en el if
-    xhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-          // Typical action to be performed when the document is ready:
-          console.log(xhttp.responseText);
-          var Temp = JSON.parse(xhttp.responseText);
-          _this.setState({dataSource:Temp});
-        }
+  componentDidMount = () =>{
+
+    const request = new XMLHttpRequest();
+    _this = this;
+    request.onreadystatechange = e => {
+      if (request.readyState !== 4) {
+        return;
+      }
+
+      if (request.status === 200) {
+        console.log('success json', request.responseText);
+        var data = JSON.parse(request.responseText)
+        _this.setState({dataSource:data});
+        
+      } else {
+        console.warn('error en json');
+      }
     };
-    xhttp.open("GET", "https://dcc2.000webhostapp.com/2023B/datos.json", true);
-    xhttp.send();
+
+    request.open('GET', 'https://cuceimobile.space/datos.json');
+    request.send();
   }
 
   render() {
-    
+    const navigation = this.context;
     return (
       <View>
         <TouchableOpacity style={{margin:'15',width:'15'}} >
@@ -44,22 +54,21 @@ export default class Tab1 extends Component {
         </TouchableOpacity>
         <Text style={{color: 'black', textAlign: 'center',fontSize: 40}}> Bienvenido </Text>
 
-      <View>
+      <View style={{alignContent:'center', alignItems:'center',}}>
         <Text style={{color:'red', fontSize: 30, textAlign:'center'}}>Lista de Trabajadores</Text>
         <FlatList
         data={this.state.dataSource}
         renderItem={({item}) => 
-      
-        <View style={{height:40}}> 
-          <Text style={{color:'black',fontSize:15}}>{item.Nombre}</Text>  
-          <Text style={{color:'black',fontSize:15}}>{item.Profesion}</Text>
-          <Text style={{color:'black',fontSize:15}}>{item.Telefono}</Text>
 
-          <View>
+        <View style={{height:150}}> 
+            <TouchableOpacity onPress={()=> navigation.navigate("Usuario",item)} ><Text style={{marginTop:15, color: 'black', fontSize: 20, textAlign: 'center'}}>Nombre: {item.Nombre}</Text></TouchableOpacity>
+          <Text style={{color: 'black', fontSize: 20, textAlign: 'center',}}>Profesion: {item.Profesion}</Text>
+          <Text style={{color: 'black', fontSize: 20, textAlign: 'center'}}>Telefono: {item.Telefono}</Text>
           <Image
-          style={{width:200,height:150}}
+          source={{uri: item.Imagen}}
+          style={{width: 50, height:50,marginTop:15,marginBottom:15, marginLeft:'40%'}}
+          
           />
-          </View>
 
         </View>
         }

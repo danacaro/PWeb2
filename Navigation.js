@@ -8,6 +8,7 @@ import Inicio from './Inicio';
 import Inscripcion from './Inscripcion';
 import Menu from './screens/Menu';
 import Perfil from './screens/Tab2';
+import Usuario from './screens/Usuario';
 
 
 
@@ -32,6 +33,7 @@ export default class Navigation extends Component {
         <Stack.Screen name="Inscripcion" component={Inscripcion} />
         <Stack.Screen name="Perfil" component={Perfil} />
         <Stack.Screen name="Menu" component={Menu} options={{headerShown: false}}/>
+        <Stack.Screen name="Usuario" component={Usuario} />
       </Stack.Navigator>
       </NavigationContainer>
 
